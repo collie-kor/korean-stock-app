@@ -3,6 +3,7 @@
 """
 
 import streamlit as st
+
 import pandas as pd
 import numpy as np
 import plotly.graph_objects as go
@@ -10,7 +11,14 @@ from plotly.subplots import make_subplots
 from datetime import datetime, timedelta
 import warnings
 warnings.filterwarnings('ignore')
-
+import os
+# Streamlit Cloud Secrets 지원
+if hasattr(st, 'secrets'):
+    if 'KRX_ID' in st.secrets:
+        os.environ['KRX_ID'] = st.secrets['KRX_ID']
+    if 'KRX_PW' in st.secrets:
+        os.environ['KRX_PW'] = st.secrets['KRX_PW']
+        
 import yfinance as yf
 from pykrx import stock
 from sklearn.ensemble import RandomForestRegressor
