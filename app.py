@@ -12,13 +12,14 @@ from datetime import datetime, timedelta
 import warnings
 warnings.filterwarnings('ignore')
 import os
-# Streamlit Cloud Secrets 지원
-if hasattr(st, 'secrets'):
+try:
     if 'KRX_ID' in st.secrets:
         os.environ['KRX_ID'] = st.secrets['KRX_ID']
     if 'KRX_PW' in st.secrets:
         os.environ['KRX_PW'] = st.secrets['KRX_PW']
-        
+except Exception:
+    pass
+
 import yfinance as yf
 from pykrx import stock
 from sklearn.ensemble import RandomForestRegressor
